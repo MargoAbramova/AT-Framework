@@ -1,5 +1,6 @@
-package pages.base;
+package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,15 +11,21 @@ import static constants.Constant.TimeoutVariable.EXPLICIT_WAIT;
 public class BasePage {
     protected WebDriver driver;
     public BasePage (WebDriver driver){
-        this.driver=driver;
+        this.driver = driver;
 
     }
-    public void open (String url){
+
+    public void open(String url) {
         driver.get(url);
     }
-    public WebElement waitElemebtIsVisible(WebElement element) {
+
+    public WebElement waitElementIsVisible(WebElement element) {
         new WebDriverWait(driver, EXPLICIT_WAIT).until(ExpectedConditions.visibilityOf(element));
         return element;
 
+    }
+
+    public void waitElementIsPresent(By by) {
+        new WebDriverWait(driver, EXPLICIT_WAIT).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 }

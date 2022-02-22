@@ -1,30 +1,20 @@
 import common.CommonActions;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import pages.base.BasePage;
-import pages.listing.RealtListingPage;
-import pages.realt_home.RealtHomePage;
+import pages.BasePage;
+import pages.CianCardPage;
+import pages.CianHomePage;
+import pages.CianListingPage;
 
-import static common.Config.CLEAR_COOKIES_AND_STORAGE;
 import static common.Config.HOLD_BROWSER_OPEN;
 
 public class BaseTest {
     protected WebDriver driver = CommonActions.createdDriver();
     protected BasePage basePage = new BasePage(driver);
-    protected RealtHomePage realtHomePage = new RealtHomePage(driver);
-    protected RealtListingPage realtListingPage = new RealtListingPage(driver);
+    protected CianHomePage cianHomePagetHomePage = new CianHomePage(driver);
+    protected CianListingPage cianListingPage = new CianListingPage(driver);
+    protected CianCardPage cianCardPage = new CianCardPage(driver);
 
-    @AfterTest
-    public void clearCookiesAndLocalStorage() {
-        if (CLEAR_COOKIES_AND_STORAGE) {
-            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-            driver.manage().deleteAllCookies();
-            javascriptExecutor.executeScript("window.sessionStorage.clear()");
-        }
-
-    }
 
     @AfterSuite(alwaysRun = true)
     public void close() {

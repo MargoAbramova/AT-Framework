@@ -1,16 +1,26 @@
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static constants.Constant.Urls.REALT_HOME_PAGE;
+import java.util.ArrayList;
+import java.util.List;
+
+import static constants.Constant.Urls.CIAN_HOME_PAGE;
 
 @Test
 public class SearchApartmentTest extends BaseTest {
     public void checkIsRedirectToListing() {
-        basePage.open(REALT_HOME_PAGE);
-        realtHomePage
+        basePage.open(CIAN_HOME_PAGE);
+        cianHomePagetHomePage
                 .enterCountRooms()
                 .clickToFind();
-        realtListingPage.checkCountCards();
+        cianListingPage.checkCountCards();
+        cianListingPage.clickOnFirstCard();
+
+        List<String> handles = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(handles.get(1));
+
+        Assert.assertFalse(cianCardPage.getDescriptionText().isEmpty());
     }
 
 }
